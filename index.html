@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Quiz</title>
+  <link href="output.css" rel="stylesheet">
+</head>
+<body class="bg-[#001e4d] min-h-screen flex items-center justify-center">
+  <div class="bg-white w-[90%] max-w-[600px] mt-[100px] md:mt-0 rounded-[10px] p-[30px]">
+    <h1 class="text-[25px] text-[#001e4d] font-semibold border-b border-b-[#333] pb-[30px]">Simple Quiz</h1>
+    <div class="py-[20px] px-0">
+      <h2 id="question" class="text-[18px] text-[#001e4d] font-semibold">Question goes here</h2>
+      <div id="answer-buttons"></div>
+      <button id="next-btn" class="bg-[#001e4d] text-white font-medium w-[150px] border-none p-[10px] my-[20px] mx-0 cursor-pointer hidden">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: 'What is the capital of France?',
+        answers: [
+          { text: 'Berlin', correct: false },
+          { text: 'Madrid', correct: false },
+          { text: 'Paris', correct: true },
+          { text: 'Lisbon', correct: false }
+        ]
+      },
+      {
+        question: 'What is the largest planet in our solar system?',
+        answers: [
+          { text: 'Earth', correct: false },
+          { text: 'Jupiter', correct: true },
+          { text: 'Mars', correct: false },
+          { text: 'Saturn', correct: false }
+        ]
+      },
+      {
+        question: 'What is the chemical symbol for gold?',
+        answers: [
+          { text: 'Au', correct: true },
+          { text: 'Ag', correct: false },
+          { text: 'Fe', correct: false },
+          { text: 'Pb', correct: false }
+        ]
+      },
+      {
+        question: 'Who wrote "Romeo and Juliet"?',
+        answers: [
+          { text: 'Charles Dickens', correct: false },
+          { text: 'William Shakespeare', correct: true },
+          { text: 'Mark Twain', correct: false },
+          { text: 'Jane Austen', correct: false }
+        ]
+      },
+      {
+        question: 'What is the smallest prime number?',
+        answers: [
+          { text: '0', correct: false },
+          { text: '1', correct: false },
+          { text: '2', correct: true },
+          { text: '3', correct: false }
+        ]
+      }
+    ];
+
+    const questionElement = document.getElementById('question');
+    const answerButtons = document.getElementById('answer-buttons');
+    const nextButton = document.getElementById('next-btn');
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      nextButton.innerHTML = "Next";
+      showQuestion();
+    }
+
+    function showQuestion() {
+      resetState();
+      let currentQuestion = questions[currentQuestionIndex];
+      let questionNo = currentQuestionIndex + 1;
+      questionElement.innerHTML = questionNo + '. ' + currentQuestion.question;
+
+      currentQuestion.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerHTML = answer.text;
+        button.className = "bg-white text-[#222] font-medium w-full border border-[#222] p-[10px] my-[10px] mx-0 text-left rounded-[4px] cursor-pointer hover:bg-[#222] hover:text-white transition-all duration-300";
+        if (answer.correct) {
+          button.dataset.correct = answer.correct;
+        }
+        button.addEventListener('click', selectAnswer);
+        answerButtons.appendChild(button);
+      });
+    }
+
+    function resetState() {
+      nextButton.style.display = 'none';
+      while (answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
+      }
+    }
+
+    function selectAnswer(e) {
+      const selectedButton = e.target;
+      const isCorrect = selectedButton.dataset.correct === 'true';
+      if (isCorrect) {
+        selectedButton.classList.add('bg-green-600', 'text-white');
+        score++;
+      } else {
+        selectedButton.classList.add('bg-red-600', 'text-white');
+      }
+
+      Array.from(answerButtons.children).forEach(button => {
+        if (button.dataset.correct === 'true') {
+          button.classList.add('border-green-600');
+        }
+        button.disabled = true;
+      });
+      nextButton.style.display = 'block';
+    }
+
+    function handleNextButton() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      resetState();
+      questionElement.innerHTML = `You scored ${score} out of ${questions.length} !`;
+      nextButton.innerHTML = "Play Again";
+      nextButton.style.display = 'block';
+    }
+
+    nextButton.addEventListener('click', () => {
+      if (currentQuestionIndex < questions.length) {
+        handleNextButton();
+      } else {
+        startQuiz();
+      }
+    });
+
+    startQuiz();
+  </script>
+</body>
+</html>

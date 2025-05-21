@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind forms;
+
+
+.btn:hover:not(:disabled) {
+    background: #222;
+    color: #fff;
+}
+.btn:disabled {
+    cursor: no-drop;
+}
+.bg-correct {
+  background-color: #4CAF50 !important; /* Green */
+  color: white !important;
+}
+
+.bg-incorrect {
+  background-color: #f44336 !important; /* Red */
+  color: white !important;
+}
+
+.correct {
+  border: 2px solid #4CAF50;
+}
