@@ -3,6 +3,18 @@
 @tailwind utilities;
 @tailwind forms;
 
+.btn {
+  background: #fff;
+  color: #222;
+  font-weight: 500;
+  width: 100%;
+  border: 1px solid #222;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer; 
+}
 
 .btn:hover:not(:disabled) {
     background: #222;
@@ -10,17 +22,6 @@
 }
 .btn:disabled {
     cursor: no-drop;
-}
-.bg-correct {
-  background-color: #4CAF50 !important; /* Green */
-  color: white !important;
+    opacity: 0.6 ;
 }
 
-.bg-incorrect {
-  background-color: #f44336 !important; /* Red */
-  color: white !important;
-}
-
-.correct {
-  border: 2px solid #4CAF50;
-}

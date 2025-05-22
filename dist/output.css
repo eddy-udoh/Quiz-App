@@ -559,6 +559,11 @@ video {
   margin-right: 0px;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .my-\[10px\] {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -567,6 +572,10 @@ video {
 .my-\[20px\] {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
 }
 
 .mt-\[100px\] {
@@ -627,6 +636,14 @@ video {
 
 .border {
   border-width: 1px;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .border-b {
@@ -741,6 +758,19 @@ video {
 
 @tailwind forms;
 
+.btn {
+  background: #fff;
+  color: #222;
+  font-weight: 500;
+  width: 100%;
+  border: 1px solid #222;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .btn:hover:not(:disabled) {
   background: #222;
   color: #fff;
@@ -748,22 +778,7 @@ video {
 
 .btn:disabled {
   cursor: no-drop;
-}
-
-.bg-correct {
-  background-color: #4CAF50 !important;
-  /* Green */
-  color: white !important;
-}
-
-.bg-incorrect {
-  background-color: #f44336 !important;
-  /* Red */
-  color: white !important;
-}
-
-.correct {
-  border: 2px solid #4CAF50;
+  opacity: 0.6 ;
 }
 
 .hover\:bg-\[\#222\]:hover {
@@ -781,3 +796,4 @@ video {
     margin-top: 0px;
   }
 }
+

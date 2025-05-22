@@ -11,8 +11,14 @@
     <h1 class="text-[25px] text-[#001e4d] font-semibold border-b border-b-[#333] pb-[30px]">Simple Quiz</h1>
     <div class="py-[20px] px-0">
       <h2 id="question" class="text-[18px] text-[#001e4d] font-semibold">Question goes here</h2>
-      <div id="answer-buttons"></div>
-      <button id="next-btn" class="bg-[#001e4d] text-white font-medium w-[150px] border-none p-[10px] my-[20px] mx-0 cursor-pointer hidden">Next</button>
+      <div id="answer-buttons">
+        <button class="btn">Answer 1</button>
+        <button class="btn">Answer 2</button>
+        <button class="btn">Answer 3</button>
+        <button class="btn">Answer 4</button>
+      </div>
+
+      <button id="next-btn" class="bg-[#001e4d] text-white font-medium w-[150px] border-none p-[10px] my-[20px] mx-auto mb-0 hidden cursor-pointer">Next</button>
     </div>
   </div>
 
@@ -88,12 +94,14 @@
       currentQuestion.answers.forEach(answer => {
         const button = document.createElement('button');
         button.innerHTML = answer.text;
-        button.className = "bg-white text-[#222] font-medium w-full border border-[#222] p-[10px] my-[10px] mx-0 text-left rounded-[4px] cursor-pointer hover:bg-[#222] hover:text-white transition-all duration-300";
+        button.classList.add('btn');
+        button.className = " text-[#222] font-medium w-full border border-[#222] p-[10px] my-[10px] mx-0 text-left rounded-[4px] cursor-pointer hover:bg-[#222] hover:text-white transition-all duration-300";
+        answerButtons.appendChild(button);
         if (answer.correct) {
           button.dataset.correct = answer.correct;
         }
         button.addEventListener('click', selectAnswer);
-        answerButtons.appendChild(button);
+        
       });
     }
 
@@ -116,7 +124,7 @@
 
       Array.from(answerButtons.children).forEach(button => {
         if (button.dataset.correct === 'true') {
-          button.classList.add('border-green-600');
+          button.classList.add('border-2','border-green-600');
         }
         button.disabled = true;
       });
